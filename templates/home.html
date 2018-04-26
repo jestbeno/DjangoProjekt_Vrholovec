@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Tabla</li>
+{% endblock %}
+
+{% block content %}
+<table class="table">
+  <thead class="thead-inverse">
+  <tr>
+    <th>Tabla</th>
+    <th>Število objav</th>
+    <th>Število tem</th>
+    <th>Zadnja objava</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for aktivnost in tabla %}
+  <tr>
+    <td>
+      <a href="{% url 'IdejeNaTabli' aktivnost.pk %}">{{ aktivnost.name }}</a>
+      <small class="text-muted d-block">{{ aktivnost.description }}</small>
+    </td>
+    <td class="align-middle">
+      {{ aktivnost.get_posts_count }}
+    </td>
+    <td class="align-middle">
+      {{ aktivnost.ideje.count }}
+    </td>
+    <td class="align-middle">
+      {% with post=aktivnost.get_last_post %}
+      {% if post %}
+      <small>
+        <a href="{% url 'PostiIdeje' aktivnost.pk post.ideja.pk %}">
+          Objavil {{ post.created_by.username }}, {{ post.created_at|naturaltime }}
+        </a>
+      </small>
+      {% else %}
+      <small class="text-muted">
+        <em>Še ni objave.</em>
+      </small>
+      {% endif %}
+      {% endwith %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

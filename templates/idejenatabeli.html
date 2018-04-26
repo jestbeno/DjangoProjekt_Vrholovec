@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}
+  {{ tabla.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Tabla</a></li>
+  <li class="breadcrumb-item active">{{ tabla.name }}</li>
+{% endblock %}
+
+{% block content %}
+  <div class="mb-4">
+    <a href="{% url 'novaIdeja' tabla.pk %}" class="btn btn-primary">Nova ideja</a>
+  </div>
+  <table class="table">
+    <thead class="thead-inverse">
+  <tr>
+    <th>Tema</th>
+        <th>Kreator</th>
+        <th>Odgovorov</th>
+        <th>Vpogledov</th>
+        <th>Zadnji vpis</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ideja in ideje %}
+      {% url 'PostiIdeje' tabla.pk ideja.pk as ideja_url %}
+        <tr>
+        <tr>
+          <td>
+            <p class="mb-0">
+              <a href="{{ ideja_url }}">{{ ideja.subject }}</a>
+            </p>
+            <small class="text-muted">
+              Strani:
+              {% for i in ideja.get_page_range %}
+                <a href="{{ ideja_url }}?page={{ i }}">{{ i }}</a>
+              {% endfor %}
+              {% if ideja.has_many_pages %}
+              ... <a href="{{ ideja_url }}?page={{ ideja.get_page_count }}">Last Page</a>
+              {% endif %}
+            </small>
+          </td>
+          <td>{{ ideja.starter.username }}</td>
+          <td>{{ ideja.replies }}</td>
+          <td>{{ ideja.views }}</td>
+          <td>{{ ideja.last_updated|naturaltime }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+ {% include 'includes/pagination.html' %}
+
+{% endblock %}
