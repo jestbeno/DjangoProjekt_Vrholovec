@@ -21,12 +21,14 @@ from django.conf.urls import url
 
 from accounts import views as accounts_views
 from tabla import views
+from mysite import views as mysite_views
 
 urlpatterns = [
     # path('', views.home, name='home'),
-    path('', views.TablaListView.as_view(), name='home'),
+    path('', views.index, name='index'),
+    path('home/', views.TablaListView.as_view(), name='home'),
     path('signup/', accounts_views.signup,name='signup'),
-    path('login', auth_views.LoginView.as_view(template_name='login.html'),name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'),name='login'),
     path('logout/', auth_views.LogoutView.as_view(),name='logout'),
 
     url(r'^reset/$',
@@ -61,5 +63,8 @@ url(r'^settings/password/done/$', auth_views.PasswordChangeDoneView.as_view(temp
         views.PostUpdateView.as_view(), name='edit_post'),
     path('admin/', admin.site.urls),
     url(r'^settings/account/$', accounts_views.UserUpdateView.as_view(), name='my_account'),
+
+    # MYSITE
+    path('mysite/', mysite_views.index, name='mysite'),
 ]
 

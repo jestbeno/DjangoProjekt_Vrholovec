@@ -1,10 +1,14 @@
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth import views as auth_views
-from django.core.urlresolvers import reverse
-from django.urls import resolve
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth.models import User
+from django.core import mail
+from django.urls import reverse, resolve
 from django.test import TestCase
-
 
 class PasswordChangeTests(TestCase):
     def setUp(self):
@@ -42,7 +46,7 @@ class LoginRequiredPasswordChangeTests(TestCase):
         url = reverse('password_change')
         login_url = reverse('login')
         response = self.client.get(url)
-        self.assertRedirects(response, '{login_url}?next={url}'.format(login_url=login_url, url=url))
+        self.assertRedirects(response, f'{login_url}?next={url}')
 
 
 class PasswordChangeTestCase(TestCase):
@@ -106,4 +110,4 @@ class InvalidPasswordChangeTests(PasswordChangeTestCase):
         sure we have the latest data.
         '''
         self.user.refresh_from_db()
-self.assertTrue(self.user.check_password('old_password'))
+        self.assertTrue(self.user.check_password('old_password'))

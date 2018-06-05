@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item">Moja stran</li>
+<li class="breadcrumb-item">Vreme</li>
+<li class="breadcrumb-item">Šale</li>
+<li class="breadcrumb-item">Ideje</li>
+<li class="breadcrumb-item">Zapiski</li>
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container-fluid">
+        <div class="columns">
+            <div class="column is-offset-4 is-4">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 portfolio-item">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <article class="media">
+                                        <div class="media-left">
+                                            <figure class="image is-50x50">
+                                                <img src="http://openweathermap.org/img/w/{{city_weather.icon}}.png"
+                                                     alt="Image">
+                                            </figure>
+                                        </div>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p>
+                                                    <span class="title">{{city_weather.city}}</span>
+                                                    <span class="title">{{city_weather.state}}</span>
+                                                    <br>
+                                                    <span class="subtitle">{{city_weather.temperature}}° C</span>
+                                                    <br> {{city_weather.description}}
+                                                    <br> Veter: {{city_weather.wind}} km/h
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 portfolio-item">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h2 class="alert-heading alert-info">Šala dneva:</h2>
+                                    <div class="box">
+                                        <article class="media">
+                                            <span class="joke">{{random_joke.joke}}</span>
+                                        </article>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+</footer>
+{% endblock %}

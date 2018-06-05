@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Post a reply{% endblock %}
+{% block title %}Objavi odgovor{% endblock %}
 
 {% block stylesheet %}
 
@@ -12,10 +12,10 @@
 {% endblock %}
 
 {% block breadcrumb %}
-  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Tabla</a></li>
   <li class="breadcrumb-item"><a href="{% url 'IdejeNaTabli' ideja.tabla.pk %}">{{ ideja.tabla.name }}</a></li>
   <li class="breadcrumb-item active">{{ ideja.subject }}</li>
-  <li class="breadcrumb-item active">Post a reply</li>
+  <li class="breadcrumb-item active">Objavi odgovor</li>
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,7 @@
   <form method="post" class="mb-4">
     {% csrf_token %}
     {% include 'includes/form.html' %}
-    <button type="submit" class="btn btn-success">Post a reply</button>
+    <button type="submit" class="btn btn-success">Objavi odgovor</button>
   </form>
 
   {% for post in ideja.get_last_ten_posts  %}

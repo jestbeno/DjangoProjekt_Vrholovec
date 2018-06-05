@@ -14,9 +14,13 @@ from django.db.models import Count
 from .forms import NewIdejaForm, PostForm
 from .models import Tabla,Ideja,Post
 
+def index(request):
+    return render(request,'index.html')
+
 def home(request):
     tabla = Tabla.objects.all()
     return render(request, 'home.html', {'tabla': tabla})
+
 #HOME PAGE z uporabo GCBV - Generic view
 class TablaListView(ListView):
     model = Tabla
@@ -33,7 +37,7 @@ def IdejeNaTabli21(request, pk):
     queryset = tabla.ideje.order_by('-last_updated').annotate(replies=Count('posts') - 1)
     page = request.GET.get('page', 1)
 
-    paginator = Paginator(queryset, 20)
+    paginator = Paginator(queryset, 10) #prikaže 10 elementov na stran!
 
     try:
         ideje = paginator.page(page)
@@ -156,7 +160,9 @@ class PostUpdateView(UpdateView):
     model = Post
     fields = ('message', )
     template_name = 'edit_post.html'
+    # The pk_url_kwarg will be used to identify the name of the keyword argument used to retrieve the Post object. It’s the same as we define in the urls.py.
     pk_url_kwarg = 'post_pk'
+    # If we don’t set the context_object_name attribute, the Post object will be available in the template as “object.” So, here we are using the context_object_name to rename it to post instead. You will see how we are using it in the template below.
     context_object_name = 'post'
 # With the line queryset = super().get_queryset() we are reusing the get_queryset method from the parent class, that is, the UpateView class. Then, we are adding an extra filter to the queryset, which is filtering the post using the logged in user, available inside the request object.
     def get_queryset(self):

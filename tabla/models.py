@@ -24,6 +24,7 @@ class Ideja(models.Model):
     tabla = models.ForeignKey(Tabla, related_name='ideje',on_delete=models.CASCADE)
     starter = models.ForeignKey(User,related_name='ideje',on_delete=models.CASCADE)
     views = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.subject
 
@@ -42,10 +43,9 @@ class Ideja(models.Model):
         if self.has_many_pages(count):
             return range(1, 5)
         return range(1, count + 1)
+
     def get_last_ten_posts(self):
         return self.posts.order_by('-created_at')[:10]
-
-
 
 class Post(models.Model):
     message = models.TextField(max_length=4000)

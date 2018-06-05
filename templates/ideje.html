@@ -6,12 +6,12 @@
 
 {% block breadcrumb %}
   <li class="breadcrumb-item"><a href="{% url 'home' %}">Ideja</a></li>
-  <li class="breadcrumb-item active">{{ board.name }}</li>
+  <li class="breadcrumb-item active">{{ ideja.name }}</li>
 {% endblock %}
 
 {% block content %}
   <div class="mb-4">
-    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">New topic</a>
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">Nova ideja</a>
   </div>
 
   <table class="table">
