@@ -18,6 +18,9 @@ Prijava
 Registracija
 ![Alt text](IMG/Registracija.jpg?raw=true "Registracija")
 
+Nova debata
+![Alt text](IMG/NovaDebata.png?raw=true "NovaDebata")
+
 Ostalo
 ![Alt text](IMG/Ostalo.png?raw=true "Ostalo")
 
