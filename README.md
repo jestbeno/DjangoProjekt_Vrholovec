@@ -19,7 +19,7 @@ Registracija
 ![Alt text](IMG/Registracija.jpg?raw=true "Registracija")
 
 Ostalo
-![Alt text](IMG/Ostalo.jpg?raw=true "Ostalo")
+![Alt text](IMG/Ostalo.png?raw=true "Ostalo")
 
 Domaca stran
 ![Alt text](IMG/DomacaStran.png?raw=true "DomacaStran")
