@@ -1,12 +1,14 @@
 "# vrholovec" 
 - testiranje
-- produkcija
+- produkcija (vrholovec.xyz)
 - forms
 - pagination
 - multiple apps
 - user accounts
 - humanize - objavljeno pred..n minutami
 - spremenjena baza, nič več sqlite
+- requests: aplikacija prebere trenutno vreme in random Chuck Norris vic
+
 Tabla - Javno
 ![Alt text](IMG/Tabla.png?raw=true "Tabla")
 
